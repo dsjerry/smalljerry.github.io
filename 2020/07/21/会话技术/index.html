@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>会话技术 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="概述：HTTP 协议是无状态的协议。当一个用户请求一个页面之后再请求另外一个页面时，HTTP 无法知道这两个请求时来自同一个用户。所以就需要会话技术来记录用户的状态 会话技术是维护同一个浏览器与服务器之间多次请求数据状态的技术。PHP中常用的会话技术有 Cookie 和 Session 两种，  Cookie：在浏览器端存储数据并以此来跟踪和识别用户的机制 Session：将信息存放在服务器端的会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="会话技术">
+<meta property="og:url" content="http://yoursite.com/2020/07/21/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="概述：HTTP 协议是无状态的协议。当一个用户请求一个页面之后再请求另外一个页面时，HTTP 无法知道这两个请求时来自同一个用户。所以就需要会话技术来记录用户的状态 会话技术是维护同一个浏览器与服务器之间多次请求数据状态的技术。PHP中常用的会话技术有 Cookie 和 Session 两种，  Cookie：在浏览器端存储数据并以此来跟踪和识别用户的机制 Session：将信息存放在服务器端的会">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-21T03:32:09.000Z">
+<meta property="article:modified_time" content="2020-07-23T06:59:47.104Z">
+<meta property="article:author" content="smalljerry">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="后端">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/ghaseminya.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="https://avatars2.githubusercontent.com/u/53891546?s=460&amp;u=6f987551976f2fcd6f2f49ab5b714fb72671f902&amp;v=4" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="https://avatars2.githubusercontent.com/u/53891546?s=460&amp;u=6f987551976f2fcd6f2f49ab5b714fb72671f902&amp;v=4" />
+            <h2 id="name">SmallJerry</h2>
+            <h3 id="title">————</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Mar</span>
+            <a id="follow" target="_blank" href="https://github.com/dsjerry">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                18
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                18
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/dsjerry" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-会话技术" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            会话技术
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/07/21/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/">
+            <time datetime="2020-07-21T03:32:09.000Z" itemprop="datePublished">2020-07-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/php/" rel="tag">php</a>, <a class="tag-link-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>概述：HTTP 协议是无状态的协议。当一个用户请求一个页面之后再请求另外一个页面时，HTTP 无法知道这两个请求时来自同一个用户。所以就需要<strong>会话技术</strong>来记录用户的状态</p>
+<p>会话技术是维护同一个浏览器与服务器之间多次请求数据状态的技术。PHP中常用的会话技术有 <code>Cookie</code> 和 <code>Session</code> 两种，</p>
+<ul>
+<li>Cookie：在浏览器端存储数据并以此来跟踪和识别用户的机制</li>
+<li>Session：将信息存放在服务器端的会话技术<a id="more"></a></li>
+</ul>
+<h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h1><p>当用户通过浏览器访问 Web服务器 时，服务器会给用户发送一些信息，这些信息都保存在 Cookie 中。当浏览器<em>再次</em>服务器的时候，会在<strong>请求头</strong>中同时将 Cookie 发送给服务器。</p>
+<p>利用 Cookie 可以跟踪用户与服务器之间的会话状态，通常应用于保存浏览历史、保存购物车商品和保存用户登录状态等场景。</p>
+<p>当用户第一次访问服务器时，服务器会在响应消息中增加 <code>Set-Cookie</code> 头字段，将信息以 Cookie 的形式发送给浏览器，保存到浏览器缓冲区。下次访问的时候再将 Cookie 发给服务器，这样服务器就识别出了是哪个用户在发送请求。（关于 Cookie 的一些知识在文章底部）</p>
+<p>Cookie的一些缺点：</p>
+<ul>
+<li>附加在 HTTP 消息中，增加了数据流量</li>
+<li>在 HTTP 中是以明文传输的，安全性不高，容易被窃取</li>
+<li>Cookie 存储于浏览器，可以被篡改，服务器接收后必须验证数据的合法性</li>
+<li>浏览器限制 Cookie 的数量和大小（一般是50个，一个不超过4KB）</li>
+</ul>
+<h2 id="Cookie的基本使用"><a href="#Cookie的基本使用" class="headerlink" title="Cookie的基本使用"></a>Cookie的基本使用</h2><p>① 创建Cookie</p>
+<p>在 PHP 中使用 <code>setcookie()</code> 函数可以创建和修改Cookie。其声明方式如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> setcookie(</span><br><span class="line">    <span class="keyword">string</span> $name,                <span class="comment">// Cookie 的名字（必选）</span></span><br><span class="line">    <span class="keyword">string</span> $value = <span class="string">&quot;&quot;</span>,                 <span class="comment">// Cookie 的值</span></span><br><span class="line">    <span class="keyword">int</span> $expire = <span class="number">0</span>,            <span class="comment">// Cookie 的有效期</span></span><br><span class="line">    <span class="keyword">string</span> $path = <span class="string">&quot;&quot;</span>,             <span class="comment">// Cookie 在服务器端的路径</span></span><br><span class="line">    <span class="keyword">string</span> $domain = <span class="string">&quot;&quot;</span>,         <span class="comment">// Cookie 的有效域名</span></span><br><span class="line">    <span class="keyword">bool</span> $secure = <span class="literal">false</span>,         <span class="comment">// 指定是否通过安全的 HTTPS 连接来传输</span></span><br><span class="line">    <span class="keyword">bool</span> $httponly = <span class="literal">false</span>        <span class="comment">// 指定 Cookie 只能通过 HTTP 协议访问</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>实现代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setcookie(<span class="string">&#x27;abc&#x27;</span>, <span class="string">&#x27;123&#x27;</span>, time() + <span class="number">1800</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​    第三个参数是时间戳，省略的时候，Cookie 会在浏览器结束的时候关掉</p>
+<blockquote>
+<p>如果使用 JavaScript 操作 Cookie，setcookie() 的 $httponly 的值要设置为 false</p>
+</blockquote>
+<p>② 获取Cookie</p>
+<p>在PHP中，任何从客户端发送的 Cookie 数据都会被自动存入到 <code>$_COOKIE</code> 超全局数组( $_COOKIE[] )变量中，以此来获取 Cookie 数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">setcookie(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;张三&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> $_COOKIE[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="comment">// 保存和获取数组形式的Cookie</span></span><br><span class="line">setcookie(<span class="string">&#x27;history[one]&#x27;</span>, <span class="number">1</span>);</span><br><span class="line">setcookie(<span class="string">&#x27;history[two]&#x27;</span>, <span class="number">2</span>);</span><br><span class="line">$history = <span class="keyword">isset</span>($_COOKIE[<span class="string">&#x27;history&#x27;</span>]) ? (<span class="keyword">array</span>)$_COOKIE[<span class="string">&#x27;history&#x27;</span>] : [];</span><br><span class="line"><span class="keyword">foreach</span> ($history <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;$k - $v &lt;br&gt;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当 PHP 第一次使用 setcookie() 来创建 Cookie 时，$_COOKIE 中没有这个数据，当浏览器下次请求的时候才可以通过 $_COOKIE 获取到值</p>
+<p>③ 删除Cookie</p>
+<p>如果没设置过期时间，当浏览器关闭的时候Cookie文件就会被清除。如果想自定义删除：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setcookie(<span class="string">&#x27;data&#x27;</span>, <span class="string">&#x27;&#x27;</span>, time() - <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>表示立即过时，相当于删除了。value 设置为空，过期时间设置为小于当前系统时间。</p>
+<h2 id="Cookie-的路径和域名"><a href="#Cookie-的路径和域名" class="headerlink" title="Cookie 的路径和域名"></a>Cookie 的路径和域名</h2><p>Chrome 浏览器中，设置 &gt; 高级设置 &gt; 隐私设置 &gt; 内容设置 &gt; 所有Cookie和网站数据</p>
+<p>不同版本的浏览器可能不同，不同浏览器能够存放的数量也可能不同 </p>
+<h2 id="超全局变量-REQUEST"><a href="#超全局变量-REQUEST" class="headerlink" title="超全局变量 $_REQUEST"></a>超全局变量 $_REQUEST</h2><p>默认情况下，$_REQUEST超全局变量数组变量，可以同时获取用户 GET 和 POST 请求方式提交的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form method&#x3D;&quot;post&quot; action&#x3D;&quot;test.php?a&#x3D;xxx&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;b&quot; value&#x3D;&quot;yyy&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;提交&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在 test.php 中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print_r($_REQUEST);</span><br></pre></td></tr></table></figure>
+
+<p>  $_REQUEST 的值受 <code>php.ini</code> 文件中的 <code>request_order</code> 影响</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">request_order</span> = <span class="string">&quot;GP&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>G表示$_GET，P表示 $_POST</p>
+</li>
+<li><p>添加 C（$_COOKIE）可以接受 Cookie 数据，PHP解析的优先级是 <strong>C&gt;P&gt;G</strong>。接受数据同名的时候，优先级高的会覆盖优先级低的</p>
+<ul>
+<li><p>PHP解析优先级也可以改，同样在 php.init 文件中，修改</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">variable_order</span> = <span class="string">&quot;PG&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>后解析的新值会覆盖旧值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h1><p>Session 在网络应用中称为会话，通常用于保存用户登录状态、保存生成的验证码等</p>
+<p>Session 是一种<u>服务器端</u>的技术，它的生命周期从用户访问页面开始，知道断开与网站的连接结束。Web服务器在运行时会为每个用户的浏览器创建供其一个独享的 Session文件</p>
+<p>每一个 Session 都具有一个唯一的会话ID，用于标识不同的用户。会话ID会分别保存在客户端和服务器端，客户端通过 Cookie 保存，而服务器端以文件的形式保存在 php.ini <strong>指定的</strong> Session目录（Windows默认保存：C:Windows\Temp）</p>
+<h2 id="Session的基本使用"><a href="#Session的基本使用" class="headerlink" title="Session的基本使用"></a>Session的基本使用</h2><p>① 启动</p>
+<p>使用 <code>session_start()</code> 启动，该函数返回值为布尔值，成功返回true，失败false</p>
+<p>可在浏览器中 Network 中 点中某一条响应查看它的 Session</p>
+<p>② 使用</p>
+<p>可以通过 <code>$_SESSION</code> 添加、读取、修改Session中的数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line">$_SESSION[<span class="string">&#x27;username&#x27;</span>] = <span class="string">&#x27;Tome&#x27;</span>;</span><br><span class="line">$_SESSION[<span class="string">&#x27;id&#x27;</span>] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_SESSION[<span class="string">&#x27;test&#x27;</span>])) &#123;</span><br><span class="line">    $test = $_SESSION[<span class="string">&#x27;test&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">unset</span>($_SESSION[<span class="string">&#x27;username&#x27;</span>]);    <span class="comment">// 删除单个数据</span></span><br><span class="line">$_SESSION = [];        <span class="comment">// 删除所有数据</span></span><br><span class="line">session_destroy();    <span class="comment">// 结束当前会话</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$_SESSION = []，可以删除 Session 中的所有数据，但是 <em>Session文件还是存在的</em>，它是一个空文件</li>
+<li>如果要删除这个空文件，使用<code>session_destroy()</code></li>
+</ul>
+<p>③ Session 的配置</p>
+<table>
+<thead>
+<tr>
+<th align="center">配置项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">session.name</td>
+<td align="center">指定 Cookie 的名字，只能由字母、数字组成，默认为PHPSESSID</td>
+</tr>
+<tr>
+<td align="center">session.save_path</td>
+<td align="center">读取或设置当前会话文件保存路径，默认为“C:Windows\Temp”</td>
+</tr>
+<tr>
+<td align="center">session.auto_start</td>
+<td align="center">指定是否在请求开始时自动启动一个会话，默认值是0（不启动）</td>
+</tr>
+<tr>
+<td align="center">session.cookie_lifetime</td>
+<td align="center">以秒数指定发送到浏览器的 Cookie 的生命周期，默认为0（知道浏览器关闭）</td>
+</tr>
+<tr>
+<td align="center">session.cookie_path</td>
+<td align="center">设定会话 Cookie 的路径，默认为 /</td>
+</tr>
+<tr>
+<td align="center">session.cookie.domain</td>
+<td align="center">设定会话 Cookie 的域名，默认为没有</td>
+</tr>
+<tr>
+<td align="center">session.cookie_secure</td>
+<td align="center">是否仅通过安全连接发送 Cookie，默认 off</td>
+</tr>
+<tr>
+<td align="center">session.cookie_httponly</td>
+<td align="center">是否仅通过HTTP访问 Cookie，默认 off</td>
+</tr>
+</tbody></table>
+<p>PHP7.0 开始，在 session_start() 中可以对 Session进行配置，用于覆盖 php.ini 中对Session的配置指令</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session_start([<span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;MySESSID&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在这里配置的时候，键名不需要加上 <code>session.</code></li>
+<li>在这里配置的时候，session.cookie_lifetime（整形），session.auto_start、session.cookie_secure 和 session.cookie_httponly 为布尔型，其它的是字符串型</li>
+</ul>
+<blockquote>
+<p>session_start() 中的配置只在脚本运行周期中生效，并不影响 php.ini 中原本的配置</p>
+</blockquote>
+<h2 id="Session-机制"><a href="#Session-机制" class="headerlink" title="Session 机制"></a>Session 机制</h2><p>Session 机制是通过调用 <code>session_set_save_handler</code> 实现的</p>
+<p>默认情况下，PHP中的Session是通过实现 <strong>SessionHandlerInterface 接口</strong>，将其以文件的形式存储在服务器中的，这个接口有6种抽象方法：</p>
+<ul>
+<li>close：关闭 Session</li>
+<li>destroy：销毁 Session</li>
+<li>gc：垃圾回收</li>
+<li>open：开启 Session</li>
+<li>read：读取 Session</li>
+<li>write：写入 Session</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">SessionHandlerInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">close</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">destroy</span>(<span class="params"><span class="keyword">string</span> $session_id</span>)</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">gc</span>(<span class="params"><span class="keyword">int</span> $maxlifetime</span>)</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">open</span>(<span class="params"><span class="keyword">string</span> $save_path, <span class="keyword">string</span> $session_name</span>)</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params"><span class="keyword">string</span> $session_id</span>)</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">write</span>(<span class="params"><span class="keyword">string</span> $session_id, <span class="keyword">string</span> $session_data</span>)</span>;</span><br><span class="line">&#125; <span class="keyword">default</span> charset=utf<span class="number">-8</span>;</span><br></pre></td></tr></table></figure>
+
+<p>通过重新实现接口，完成具体的实现方法，然后再利用 Session机制可以改变 Session 存储的默认方式</p>
+<p>例：<strong>Session入库实现例子</strong></p>
+<p>① 先创建一个保存 Session 的数据表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="string">`sess_storage`</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="string">`sess_storage`</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="string">`session`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) primary <span class="keyword">key</span> <span class="keyword">comment</span> <span class="string">&#x27;SessionID&#x27;</span>,</span><br><span class="line">  <span class="string">`expires`</span> <span class="built_in">int</span> <span class="keyword">unsigned</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">comment</span> <span class="string">&#x27;过期时间&#x27;</span>,</span><br><span class="line">  <span class="string">`data`</span> blog <span class="keyword">comment</span> <span class="string">&#x27;数据&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>② 实现接口</p>
+<p>创建 SessionDB.php文件，用于实现接口</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SessionDB</span> <span class="keyword">implements</span> <span class="title">SessionHandlerInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $link;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">open</span>(<span class="params">$savePath, $sessionName</span>) </span>&#123; <span class="comment">/*处理语句*/</span> &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">close</span>(<span class="params"></span>) </span>&#123; <span class="comment">/*处理语句*/</span> &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">write</span>(<span class="params">$id, $data</span>) </span>&#123; <span class="comment">/*处理语句*/</span> &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params">$id</span>) </span>&#123; <span class="comment">/*处理语句*/</span> &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">destroy</span>(<span class="params">$id</span>) </span>&#123; <span class="comment">/*处理语句*/</span> &#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">gc</span>(<span class="params"><span class="keyword">int</span> $maxlifetime</span>) </span>&#123; <span class="comment">/*处理语句*/</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$link 用于保存数据库连接</li>
+</ul>
+<p>实现 open 方法</p>
+<ul>
+<li>接口里面的 open() 方法类似于类的构造方法，在会话打开的时候内调用</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">open</span>(<span class="params">$savePath, $sessionName</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">$this</span> -&gt; link = <span class="keyword">new</span> mysqli(<span class="string">&#x27;localhost&#x27;</span>, <span class="string">&#x27;root&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>, <span class="string">&#x27;sess_storage&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">bool</span>) <span class="keyword">$this</span> -&gt; link;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>实现 close 方法</p>
+<ul>
+<li>这类似于类的析构方法，在 write 方法调用完成之后调用。这里实现关闭数据库连接</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">close</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span> -&gt; link -&gt; close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>实现 write 方法</p>
+<ul>
+<li>将 Session 数据写入指定的位置，默认的情况下以文件的形式写进服务器中。<strong>以此方法修改保存到数据库中</strong></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">write</span>(<span class="params">$id, $data</span>) </span>&#123;</span><br><span class="line">    $expires = time() + <span class="number">3600</span>;  <span class="comment">// 一小时的过期时间</span></span><br><span class="line">    $sql = <span class="string">&#x27;REPLACE INTO `session` SET `id` = ?, `data` = ?&#x27;</span>;</span><br><span class="line">    $stmt = <span class="keyword">$this</span>-&gt;link-&gt;prepare($sql);</span><br><span class="line">    $stmt = bind_param(<span class="string">&#x27;sis&#x27;</span>, $id, $expires, $data);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">bool</span>) $stmt-&gt;execute();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Session 数据表中的 ID 是 Session 的会话ID，是唯一的</li>
+<li>在有效的时间内重复修改 Session 数据，使用 REPLACE</li>
+</ul>
+<p>实现 read 方法</p>
+<ul>
+<li>用于根据 Session 的会话ID 到指定位置获取 Session 数据并返回<strong>执行结果</strong></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params">$id</span>) </span>&#123;</span><br><span class="line">    $now = time();</span><br><span class="line">    $sql = <span class="string">&quot;SELECT `data` FROM `session` WHERE `id` = &#x27;$id&#x27; AND `expires` &gt; $now&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">string</span>) <span class="keyword">$this</span>-&gt;link-&gt;query($sql)-&gt;fetch_assoc()[<span class="string">&#x27;data&#x27;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>存在时直接返回结果，不存在返回空字符串</li>
+</ul>
+<p>实现 destroy 方法</p>
+<ul>
+<li>实现用于<strong>结束</strong>当前会话的同时，根据会话ID<strong>删除</strong>数据库中对应的 Session 信息</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">destroy</span>(<span class="params">$id</span>) </span>&#123;</span><br><span class="line">    $sql = <span class="string">&quot;DELETE FROM `session` WHERE `id` = $id&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">bool</span>) <span class="keyword">$this</span>-&gt;link-&gt;query($sql);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>实现 gc 方法</p>
+<ul>
+<li>用于清理会话中的旧数据</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">gc</span>(<span class="params"><span class="keyword">int</span> $maxlifetime</span>) </span>&#123;</span><br><span class="line">    $sql = <span class="string">&quot;DELETE FROM `session` WHERE (`expires` + $maxlifetime) &lt; $maxlifetime&quot;</span>;</span><br><span class="line">    $result = <span class="keyword">$this</span>-&gt;link-&gt;query($sql);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">bool</span>) $result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$maxlifetime 保存的是 php.ini 中 <code>session.gc_maxlifetime</code> 配置项指定的 Session 数据经过多长时间被视为垃圾而清除的<em>秒数</em></li>
+</ul>
+<p>完成 Session 入库设置</p>
+<ul>
+<li>实现所有的抽象方法之后，利用 SessionDB 类的构造方法设置 Session 机制</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    session_set_save_handler(<span class="keyword">$this</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一个参数：实现 SessionHandlerInterface 接口的对象</li>
+<li>第 二个参数：true 表示将 <code>session_write_close()</code> <strong>设置为</strong> php 终止是执行的函数</li>
+</ul>
+<p>测试 Session 入库</p>
+<ul>
+<li>新建 test.php 文件，引入 SessionDB.php 文件，测试 Session数据是否保存在数据库中</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&#x27;./SessionDB.php&#x27;</span>;</span><br><span class="line"><span class="keyword">new</span> SessionDB();   <span class="comment">// 配置Session入库</span></span><br><span class="line">session_start();</span><br><span class="line">$_SESSION[<span class="string">&#x27;test&#x27;</span>] = <span class="string">&#x27;content&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>到数据库中查看到：<code>test|s:7:&quot;content</code><ul>
+<li>test：Session数据对应的 key 值</li>
+<li>| 后 的 “s:7” 表示该数据是7为字符长度的字符串类型数据</li>
+<li>content：Session数据</li>
+</ul>
+</li>
+</ul>
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>[]<del>(￣▽￣)</del>*</p>
+<h2 id="Cookie-的一些关系"><a href="#Cookie-的一些关系" class="headerlink" title="Cookie 的一些关系"></a>Cookie 的一些关系</h2><ul>
+<li>Cookie ：是一个<u>请求头</u>，其中含有先前由服务器通过<code>Set-Cookie</code><u>响应头</u>投放并存储到客户端的 <code>HTTP cookies</code></li>
+<li>Set-Cookie ：<u>响应头</u>，用来由服务器端向客户端发送 <code>cookies</code></li>
+<li>HTTP Cookie ：也叫 <em>Web Cookie</em> 或者 <em>浏览器 Cookie</em>。是由服务器发送到用户浏览器并保存在本地的一小块数据（上面介绍的 Cookie 是这个）</li>
+</ul>
+<p>MDN 中是这样写的，在 MDN 中它们的目录关系是：</p>
+<ul>
+<li>Cookie ：HTTP &gt; HTTP Headers &gt; Cookie</li>
+<li>Set-Cookie ：HTTP &gt; HTTP Headers &gt; Set-Cookie </li>
+<li>HTTP Cookie ：HTTP &gt; HTTP cookies</li>
+</ul>
+<p>所以，应该是这样的：</p>
+<p>Cookie 和 Set-Cookie 在 Web技术中是属于 Header，而HTTP Cookie，是Cookie的请求内容，是Set-Cookie的响应内容</p>
+<p>在浏览器请求中就可以看到 Cookie 和 后面一大串字符串的 HTTP cookie</p>
+<p>相关资料：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies">MDN</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share">分享到</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_wechat" title="微信"></a>
+    <a class="a2a_button_sina_weibo" title="微博"></a>
+    <a class="a2a_button_email" title="邮件"></a>
+    <a class="a2a_button_qzone" title="QQ空间"></a>
+    <!--    <a class="a2a_button_pinterest"></a>-->
+<!--    <a class="a2a_button_tumblr"></a>-->
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+
+</div>
+
+            
+    
+        <a href="http://yoursite.com/2020/07/21/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2020/07/21/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/07/21/%E5%8A%AA%E5%8A%9B%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    努力学习
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2020/07/18/vuex%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Vuex学习</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/js/" style="font-size: 13.33px;">js</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/php/" style="font-size: 16.67px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/vscode-%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">vscode,插件</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/10/test/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://ejs.bootcss.com/assets/images/jake_display.png)" alt="test" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/08/10/test/" class="title">test</a></p>
+                            <p class="item-date"><time datetime="2020-08-10T01:15:21.000Z" itemprop="datePublished">2020-08-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://ejs.bootcss.com/assets/images/jake_display.png)" alt="Vue Router知识小补充" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a></p>
+                            <p class="item-title"><a href="/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="title">Vue Router知识小补充</a></p>
+                            <p class="item-date"><time datetime="2020-08-05T01:17:50.000Z" itemprop="datePublished">2020-08-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a></p>
+                            <p class="item-title"><a href="/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="title">php数组的常用函数</a></p>
+                            <p class="item-date"><time datetime="2020-07-28T01:58:18.000Z" itemprop="datePublished">2020-07-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
+                            <p class="item-title"><a href="/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="title">php开发环境搭建</a></p>
+                            <p class="item-date"><time datetime="2020-07-24T07:28:40.000Z" itemprop="datePublished">2020-07-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
+                            <p class="item-title"><a href="/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="title">vscode配置phpcs</a></p>
+                            <p class="item-date"><time datetime="2020-07-23T09:06:35.000Z" itemprop="datePublished">2020-07-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/" rel="tag">node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode-%E6%8F%92%E4%BB%B6/" rel="tag">vscode,插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/" rel="tag">vuex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 smalljerry<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/ppoffice">Hexo</a>
+            .<br/><a target="_blank" rel="noopener" href="http://github.com/ghaseminya"></a>
+
+            <a href="">lala</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2020/07/21/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/';
+        
+        this.page.identifier = '会话技术';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dsjerry' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

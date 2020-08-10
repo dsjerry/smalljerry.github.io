@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>python爬虫基础 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="爬虫：模拟客户端（浏览器），发送网络请求 入门阶段，还有很多东西需要深究、探索 前提要知道 url &#x3D; 请求协议 + 网站的域名 + 资源的路径 + 参数 浏览器请求的 url 地址，拿到的 response 里面有一些 js、css、html等内容。也就是所一条 url 请求返回的东西有很多 浏览器中 element 中的内容和爬虫中获得的 url 地址响应不同，所以需要以当前的 url 地址对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬虫基础">
+<meta property="og:url" content="http://yoursite.com/2020/06/30/python%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="爬虫：模拟客户端（浏览器），发送网络请求 入门阶段，还有很多东西需要深究、探索 前提要知道 url &#x3D; 请求协议 + 网站的域名 + 资源的路径 + 参数 浏览器请求的 url 地址，拿到的 response 里面有一些 js、css、html等内容。也就是所一条 url 请求返回的东西有很多 浏览器中 element 中的内容和爬虫中获得的 url 地址响应不同，所以需要以当前的 url 地址对">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-30T12:07:42.000Z">
+<meta property="article:modified_time" content="2020-07-21T09:00:07.177Z">
+<meta property="article:author" content="smalljerry">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/ghaseminya.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="https://avatars2.githubusercontent.com/u/53891546?s=460&amp;u=6f987551976f2fcd6f2f49ab5b714fb72671f902&amp;v=4" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="https://avatars2.githubusercontent.com/u/53891546?s=460&amp;u=6f987551976f2fcd6f2f49ab5b714fb72671f902&amp;v=4" />
+            <h2 id="name">SmallJerry</h2>
+            <h3 id="title">————</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Mar</span>
+            <a id="follow" target="_blank" href="https://github.com/dsjerry">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                18
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                18
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/dsjerry" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-python爬虫基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            python爬虫基础
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/06/30/python%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">
+            <time datetime="2020-06-30T12:07:42.000Z" itemprop="datePublished">2020-06-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>爬虫：模拟客户端（浏览器），发送网络请求</p>
+<p>入门阶段，还有很多东西需要深究、探索</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><h3 id="要知道"><a href="#要知道" class="headerlink" title="要知道"></a>要知道</h3><ul>
+<li>url = 请求协议 + 网站的域名 + 资源的路径 + 参数</li>
+<li>浏览器请求的 url 地址，拿到的 response 里面有一些 js、css、html等内容。也就是所一条 url 请求返回的东西有很多</li>
+<li>浏览器中 element 中的内容和爬虫中获得的 url 地址响应不同，所以需要以当前的 url 地址对应的响应为准。在 network 中可以找到，点击里面的response（页面上点击右键显示网页源码</li>
+<li>http：超文本传输协议。以明文的形式传输，效率高但是不安全</li>
+<li>https：http + ssl（安全套接字层<ul>
+<li>传输之前数据加密，后来再通过解密获取内容。效率低但是安全</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="前提知识"><a href="#前提知识" class="headerlink" title="前提知识"></a>前提知识</h3><p><strong>http协议 - 请求</strong></p>
+<ul>
+<li>请求行：浏览器中可以找到的那个request</li>
+<li>请求头<ul>
+<li>user-agent：用户代理，服务器通过这个知道在请求资源的是什么设备、平台、浏览器<ul>
+<li>如果是模拟手机来请求服务器，就得使用手机的 user-agent</li>
+</ul>
+</li>
+<li>cookie：用来存储用户信息，每次请求都传给服务器<ul>
+<li>一般在面对要登录的页面的时候会使用到cookie</li>
+<li>这样就在一定程度上防止浏览器知道是在爬虫</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>请求体：<em>get</em> 请求没有，<em>post</em> 请求有<ul>
+<li>就是携带数据的，get 请求的数据在 url 上，post 的数据在请求体里</li>
+<li>post能携带的数据量比较大，t一般用于登录注册、用于传输大文本的时候</li>
+</ul>
+</li>
+</ul>
+<p><strong>http响应</strong></p>
+<ul>
+<li>响应头：set-cookie，对方服务器通过这个字段设置cookie到本地<ul>
+<li>等号前的是 cookie 的 <em>name</em> ，后的是 cookie 的 <em>value</em>，分号等额每一条 cookie</li>
+</ul>
+</li>
+<li>响应体：url 地址对应的响应</li>
+</ul>
+<h2 id="requests"><a href="#requests" class="headerlink" title="requests"></a>requests</h2><p>python 爬虫的关键所在，第三方模块。</p>
+<p>安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install requests</span><br></pre></td></tr></table></figure>
+
+<p>使用：直接引入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br></pre></td></tr></table></figure>
+
+<p>发送 <em>get</em>、<em>post</em> 请求</p>
+<ul>
+<li><p>response = requests.get( url )</p>
+</li>
+<li><p>response = requests.post( url, data={ 请求体的字典 } )</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">&quot;xxxxx&quot;</span></span><br><span class="line">query_string = &#123;</span><br><span class="line">    <span class="string">&quot;xxx&quot;</span>: <span class="string">&quot;zzz&quot;</span>,</span><br><span class="line">    <span class="string">&quot;hhh&quot;</span>: <span class="string">&quot;sss&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;user-agent&quot;</span>: <span class="string">&quot;qweasdzxc&quot;</span>,</span><br><span class="line">    <span class="string">&quot;cookie&quot;</span>: <span class="string">&quot;ahhxixilala&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">response = requests.post(url, data=quert_string, headers=headers)</span><br><span class="line">print(response.content.decode())</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>除了使用 <code>cookie</code> 来记录用户，还可以使用 <code>session</code> 来记录用户</li>
+</ul>
+</li>
+</ul>
+<p><strong>response</strong>的方法</p>
+<ul>
+<li><p>response.text()：这个方法如果出现乱码，就使用 <code>response.encoding=&quot;utf-8&quot;</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取网页的html字符串</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line"><span class="comment"># 返回的是随机的编码，一般情况下直接 .text 可以得到，如果不行，就加上这个编码</span></span><br><span class="line">response.encoding = <span class="string">&quot;utf-8&quot;</span></span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>response.content.decode()：把响应的二进制字节流转化为 <em>str</em> 类型</p>
+</li>
+<li><p>response.request.url：发送请求的 ur l地址</p>
+</li>
+<li><p>response.url：response响应的url地址</p>
+</li>
+<li><p>response.request.headers：请求头</p>
+</li>
+<li><p>response.headers：响应请求</p>
+</li>
+</ul>
+<p>获取源码的方式（这三种方式一定能获得网页正确解码后的字符串）</p>
+<ul>
+<li>response.content.decode()</li>
+<li>response.content.decode(“gbk”)</li>
+<li>response.text</li>
+</ul>
+<h2 id="requests-session"><a href="#requests-session" class="headerlink" title="requests.session"></a>requests.session</h2><p>这里是使用了 session 来代替了 cookie</p>
+<ul>
+<li><p>实例化session</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session = requests.session()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 session 发送 post 请求，获取服务器在本地保存的 cookie，比如登录</span></span><br><span class="line">post_url = <span class="string">&quot;xxxssswww&quot;</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;user-agent&quot;</span>: <span class="string">&quot;zxcasdqwe&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">post_data = &#123;<span class="string">&quot;username&quot;</span>: <span class="string">&quot;jerry&quot;</span>, <span class="string">&quot;password&quot;</span>: <span class="string">&quot;123456&quot;</span>&#125;</span><br><span class="line">session.post(post_url, headers=headers, data=post_data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可再次使用session，请求登录之后的页面</span></span><br><span class="line">url = <span class="string">&quot;xxxxxx&quot;</span></span><br><span class="line">response = session.get(url, headers=headers)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将内容保存到一个新的文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">&quot;test.html&quot;</span>, <span class="string">&quot;w&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(response.content.decode())</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h2 id="数据提取方法"><a href="#数据提取方法" class="headerlink" title="数据提取方法"></a>数据提取方法</h2><h3 id="json"><a href="#json" class="headerlink" title="json"></a>json</h3><p>一种数据交换的格式，一般吧网页切换成 <em>手机版</em> 会返回 json 类型的数据。导入：<code>import json</code>，内部模块，不需要使用 pip 下载</p>
+<ul>
+<li><code>json.load</code> 把 json 字符串转化为 python 类型<ul>
+<li>json.load(json字符串)</li>
+</ul>
+</li>
+<li><code>json.dumps</code> 把 python 类型转化为字符串<ul>
+<li>json.dumps( { } )<ul>
+<li>json.dumps( val, ensure_ascii=False, indent=2 )<ul>
+<li>ensure_ascii=False：让中文显示成中文，False首字母要大写</li>
+<li>indent：让下一行在上一行的基础上空格</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="xpath-和-lxml"><a href="#xpath-和-lxml" class="headerlink" title="xpath 和 lxml"></a>xpath 和 lxml</h3><p><strong>xpath</strong></p>
+<p>​    <strong>xpath helper</strong> ：一款浏览器插件，可以在浏览器的 <code>elements</code>中定位数据</p>
+<p>使用方法：</p>
+<ul>
+<li><code> /html/head/meta</code>：选中 html 中 head 下的所有 meta 标签</li>
+<li><code>//</code> ：从任意节点开始选择</li>
+<li><code>//li</code> ：当前页面上的所有 li 标签</li>
+<li><code>/html/head//link</code> ：head 下的所有 link 标签</li>
+<li><code>@</code> <ul>
+<li>选择具体某个元素：<code>//div[@class=&#39;app&#39;]/ul/li</code>（选择了class名为 app 下的 ul 下的 li）</li>
+<li><code>@a/@href</code>：选择 a 标签下的 href 值</li>
+</ul>
+</li>
+<li>获取文本：<ul>
+<li><code>/a/text()</code>：获取 a 下面的文本</li>
+<li><code>/a//text()</code>：获取 a 下面的所有文本</li>
+</ul>
+</li>
+<li><code>.</code><ul>
+<li><code>./a</code> ：当前节点下的 a 标签</li>
+</ul>
+</li>
+</ul>
+<p><strong>lxml</strong></p>
+<p>安装：<code>$ pip install lxml</code></p>
+<p>使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">element = etree.HTML(<span class="string">&quot;html字符串&quot;</span>)</span><br><span class="line">element.xpath(<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>例如1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">html_str = response.content.decode()</span><br><span class="line">html = etree.HTML(html_str)</span><br><span class="line">print(html)</span><br><span class="line">img_list = html.xpath(<span class="string">&quot;//div[@class=&#x27;indent&#x27;]/div/table//a[@class=&#x27;nbg&#x27;]/img/@src&quot;</span>)  <span class="comment"># 获取某个页面内的图片</span></span><br><span class="line">print(img_list)</span><br></pre></td></tr></table></figure>
+
+<p>例如2，获取网页上的多种类型数据(接上)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ret1 = html.xpath(<span class="string">&quot;//div[@class=&#x27;indent&#x27;]/div/table&quot;</span>)  <span class="comment"># 设置前缀，后面的使用就不需要重新写这些相同的部分</span></span><br><span class="line">print(ret1)</span><br><span class="line"><span class="keyword">for</span> table <span class="keyword">in</span> ret1:</span><br><span class="line">    item = &#123;&#125;</span><br><span class="line">    <span class="comment"># 起初是得到很多数据，后面使用[0].replace.....过滤数据，当然可以使用其他办法，这里使用这个简单的方法</span></span><br><span class="line">    <span class="comment"># [0] 所示投机取巧，不是什么时候都能用</span></span><br><span class="line">    item[<span class="string">&quot;title&quot;</span>] = table.xpath(<span class="string">&quot;.//div[@class=&#x27;pl2&#x27;]/a//text()&quot;</span>)[<span class="number">0</span>].replace(<span class="string">&quot;/&quot;</span>, <span class="string">&quot;&quot;</span>).strip()</span><br><span class="line">    item[<span class="string">&quot;href&quot;</span>] = table.xpath(<span class="string">&quot;.//div[@class=&#x27;pl2&#x27;]/a/@href&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">    item[<span class="string">&quot;img&quot;</span>] = table.xpath(<span class="string">&quot;.//a[@class=&#x27;nbg&#x27;]/img/@src&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">    item[<span class="string">&quot;comment_num&quot;</span>] = table.xpath(<span class="string">&quot;.//span[@class=&#x27;pl&#x27;]/text()&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">    print(item)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>strip() 方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列</li>
+</ul>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>前提安装：requests，lxml</p>
+<blockquote>
+<p>网页数据的结构可能已经改变，了解爬虫思路就好了</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">先定义好思路，然后将思路变成具体的实现方法</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QiuShi</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.url_temp = <span class="string">&quot;https://www.qiushibaike.com/text/page/&#123;&#125;/&quot;</span></span><br><span class="line">        self.headers = &#123;<span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, &quot;</span></span><br><span class="line">                                      <span class="string">&quot;like Gecko) Chrome/83.0.4103.116 Safari/537.36&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_url_list</span>(<span class="params">self</span>):</span></span><br><span class="line">        url_list = [self.url_temp.format(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">14</span>)]</span><br><span class="line">        <span class="keyword">return</span> url_list</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_url</span>(<span class="params">self, url</span>):</span></span><br><span class="line">        response = requests.get(url, headers=self.headers)</span><br><span class="line">        <span class="keyword">return</span> response.content.decode()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_content_list</span>(<span class="params">self, html_str</span>):</span></span><br><span class="line">        html = etree.HTML(html_str)</span><br><span class="line">        <span class="comment"># 1. 分组</span></span><br><span class="line">        div_list = html.xpath(<span class="string">&quot;//div[@id=&#x27;content-left&#x27;]/div&quot;</span>)</span><br><span class="line">        content_list = []</span><br><span class="line">        <span class="keyword">for</span> div <span class="keyword">in</span> div_list:</span><br><span class="line">            item = &#123;&#125;</span><br><span class="line">            item[<span class="string">&quot;author_name&quot;</span>] = div.xpath(<span class="string">&quot;./h2/text()&quot;</span>)[<span class="number">0</span>] <span class="keyword">if</span> len(div.xpath(<span class="string">&quot;./h2/text()&quot;</span>) &gt; <span class="number">0</span>) <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">            item[<span class="string">&quot;content&quot;</span>] = div.xpath(<span class="string">&quot;.//div[@class=&#x27;content&#x27;]/span/text()&quot;</span>)</span><br><span class="line">            item[<span class="string">&quot;stats_vote&quot;</span>] = div.xpath(<span class="string">&quot;.//span[@class=&#x27;stats_vote&#x27;]/i/text()&quot;</span>)</span><br><span class="line">            item[<span class="string">&quot;stats_vote&quot;</span>] = item[<span class="string">&quot;stats_vote&quot;</span>][<span class="number">0</span>] <span class="keyword">if</span> len(item[<span class="string">&quot;stats_vote&quot;</span>]) &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">            content_list.append(item)</span><br><span class="line">        <span class="keyword">return</span> content_list</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">save_content_list</span>(<span class="params">self, content_list</span>):</span></span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">&quot;qiubai.txt&quot;</span>, <span class="string">&quot;a&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">for</span> content <span class="keyword">in</span> content_list:</span><br><span class="line">                f.write(json.dumps(content, ensure_ascii=<span class="literal">False</span>))</span><br><span class="line">                f.write(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">            print(<span class="string">&quot;保存成功&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;实现主要逻辑&quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 1. 根据url的规律，构造url list</span></span><br><span class="line">        url_list = self.get_url_list()</span><br><span class="line">        <span class="comment"># 2. 发送请求，获取响应</span></span><br><span class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</span><br><span class="line">            html_str = self.parse_url(url)</span><br><span class="line">            <span class="comment"># 3. 提取数据</span></span><br><span class="line">            content_list = self.get_content_list(html_str)</span><br><span class="line">            <span class="comment"># 4. 保存</span></span><br><span class="line">            self.save_content_list(content_list)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    qiushi = QiuShi()</span><br><span class="line">    qiushi.run()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
+<li>知道要爬取的url和url的规律，比如翻页什么的、</li>
+<li>使用 requests 发送请求，获取响应</li>
+<li>提取数据<ol>
+<li>返回json字符串，使用 json 模块</li>
+<li>返回的是 html 字符串，使用 lxml 模块 搭配 xpath 提取数据</li>
+</ol>
+</li>
+<li>保存数据</li>
+</ol>
+<hr>
+<p>加油，脚踏实地。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share">分享到</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_wechat" title="微信"></a>
+    <a class="a2a_button_sina_weibo" title="微博"></a>
+    <a class="a2a_button_email" title="邮件"></a>
+    <a class="a2a_button_qzone" title="QQ空间"></a>
+    <!--    <a class="a2a_button_pinterest"></a>-->
+<!--    <a class="a2a_button_tumblr"></a>-->
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+
+</div>
+
+            
+    
+        <a href="http://yoursite.com/2020/06/30/python%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2020/06/30/python%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/07/12/JS%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    JS一些笔记
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2020/06/26/PHP%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%9B%E9%98%B6/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">PHP面向对象进阶</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/js/" style="font-size: 13.33px;">js</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/php/" style="font-size: 16.67px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/vscode-%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">vscode,插件</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/10/test/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://ejs.bootcss.com/assets/images/jake_display.png)" alt="test" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/08/10/test/" class="title">test</a></p>
+                            <p class="item-date"><time datetime="2020-08-10T01:15:21.000Z" itemprop="datePublished">2020-08-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://ejs.bootcss.com/assets/images/jake_display.png)" alt="Vue Router知识小补充" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a></p>
+                            <p class="item-title"><a href="/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="title">Vue Router知识小补充</a></p>
+                            <p class="item-date"><time datetime="2020-08-05T01:17:50.000Z" itemprop="datePublished">2020-08-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a></p>
+                            <p class="item-title"><a href="/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="title">php数组的常用函数</a></p>
+                            <p class="item-date"><time datetime="2020-07-28T01:58:18.000Z" itemprop="datePublished">2020-07-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
+                            <p class="item-title"><a href="/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="title">php开发环境搭建</a></p>
+                            <p class="item-date"><time datetime="2020-07-24T07:28:40.000Z" itemprop="datePublished">2020-07-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
+                            <p class="item-title"><a href="/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="title">vscode配置phpcs</a></p>
+                            <p class="item-date"><time datetime="2020-07-23T09:06:35.000Z" itemprop="datePublished">2020-07-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/" rel="tag">node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode-%E6%8F%92%E4%BB%B6/" rel="tag">vscode,插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/" rel="tag">vuex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 smalljerry<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/ppoffice">Hexo</a>
+            .<br/><a target="_blank" rel="noopener" href="http://github.com/ghaseminya"></a>
+
+            <a href="">lala</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2020/06/30/python%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/';
+        
+        this.page.identifier = 'python爬虫基础';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dsjerry' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

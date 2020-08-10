@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>微信小程序 - 一些基础 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="为了方便查找和复习，粗略列出一些可能常用到的 标签、标签的属性、标签属性的值、方法、API。具体的还要以官方文档为主  一些标签 下面表示默认值时在 () 里面，表示Boolean值时使用 √和 ×   view 视图容器 text 文本域 button 按钮 type：按钮类型 primary（绿色） default（白色） warn（红色）   size：按钮大小，（ default 和 m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序 - 一些基础">
+<meta property="og:url" content="http://yoursite.com/2020/05/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="为了方便查找和复习，粗略列出一些可能常用到的 标签、标签的属性、标签属性的值、方法、API。具体的还要以官方文档为主  一些标签 下面表示默认值时在 () 里面，表示Boolean值时使用 √和 ×   view 视图容器 text 文本域 button 按钮 type：按钮类型 primary（绿色） default（白色） warn（红色）   size：按钮大小，（ default 和 m">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-18T11:43:47.000Z">
+<meta property="article:modified_time" content="2020-07-21T09:03:33.926Z">
+<meta property="article:author" content="smalljerry">
+<meta property="article:tag" content="微信小程序">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/" title="Hexo" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/ghaseminya.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="https://avatars2.githubusercontent.com/u/53891546?s=460&amp;u=6f987551976f2fcd6f2f49ab5b714fb72671f902&amp;v=4" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="https://avatars2.githubusercontent.com/u/53891546?s=460&amp;u=6f987551976f2fcd6f2f49ab5b714fb72671f902&amp;v=4" />
+            <h2 id="name">SmallJerry</h2>
+            <h3 id="title">————</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Mar</span>
+            <a id="follow" target="_blank" href="https://github.com/dsjerry">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                18
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                18
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/dsjerry" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-微信小程序" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            微信小程序 - 一些基础
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/05/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+            <time datetime="2020-05-18T11:43:47.000Z" itemprop="datePublished">2020-05-18</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote>
+<p>为了方便查找和复习，粗略列出一些可能常用到的 标签、标签的属性、标签属性的值、方法、API。具体的还要以官方文档为主</p>
+</blockquote>
+<h2 id="一些标签"><a href="#一些标签" class="headerlink" title="一些标签"></a>一些标签</h2><blockquote>
+<p>下面表示默认值时在 <code>()</code> 里面，表示Boolean值时使用 <code>√</code>和 <code>×</code></p>
+</blockquote>
+<ul>
+<li><strong>view</strong> 视图容器</li>
+<li><strong>text</strong> 文本域</li>
+<li><strong>button</strong> 按钮<ul>
+<li>type：按钮类型<ul>
+<li>primary（绿色）</li>
+<li>default（白色）</li>
+<li>warn（红色）</li>
+</ul>
+</li>
+<li>size：按钮大小，（ default 和 mini ）</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<ul>
+<li><strong>image</strong> 图片<ul>
+<li>mode：图片裁剪、缩放的模式（scaleToFill）</li>
+<li>默认宽度：300px，高度：240px</li>
+</ul>
+</li>
+<li><strong>form</strong> 表单<ul>
+<li>bindsubmit：携带 form 中的数据提交</li>
+</ul>
+</li>
+<li><strong>checkbox</strong>  复选框</li>
+<li><strong>radio</strong> 单选框</li>
+<li><strong>input</strong> 输入框…这里是单标签，并且标签内部要加入 / 作为结尾<ul>
+<li>type 的合法值<ul>
+<li>text：文本输入键盘（默认）</li>
+<li>number：数字输入键盘</li>
+<li>idcard：身份证输入键盘</li>
+<li>digit：带小数点的数字键盘</li>
+</ul>
+</li>
+<li>password：是否是密码类型（×）</li>
+<li>placeholder-style：指定这个东西的样式（placeholder-class，指定样式类）</li>
+<li>bindblur：失去焦点时触发</li>
+</ul>
+</li>
+<li><strong>progress</strong> 进度条</li>
+<li><strong>swiper</strong> 轮播图，子标签<strong>swiper-item</strong><ul>
+<li>indicator-dots：是否显示面板知识点 （×）</li>
+<li>indicator-color：指示点颜色 （rgba(0,0,0,.3)）</li>
+<li>indicator-active-color：知识点选中颜色 （#000000）</li>
+<li>autoplay：自动播放 （×）</li>
+<li>current：当前滑块所处的 index（0）</li>
+<li>current-item-id：当前滑块所在的 item-id，不能同时指向current（String类型）<ul>
+<li>配合 <code>&lt;swiper-item&gt;</code> 使用，<code>&lt;swiper current-item-id=&quot;b&quot;&gt; &lt;swiper-item item-id=&quot;b&quot;&gt;</code></li>
+</ul>
+</li>
+<li>interval：自动切换时间间隔(ms)，（5000）</li>
+<li>duration：滑块动画时长(ms)，（500）</li>
+<li>circular：是否采用衔接滑动（×）</li>
+<li>vertical：滑动的方向是否为纵向（×）</li>
+<li>bindchange：current 改变时触发的 change 事件</li>
+</ul>
+</li>
+<li><strong>include</strong> 代码引用<ul>
+<li>src：引用的 <code>wxml</code>位置</li>
+</ul>
+</li>
+<li><strong>slider</strong> 表单组件，滑动选取某一个值<ul>
+<li>backgroundColor：背景条颜色（ activeColor：已选择的颜色）</li>
+<li>max、min：最大最小值</li>
+<li>step：步长，取值大于0且可被max‘min整除</li>
+</ul>
+</li>
+<li><strong>video</strong>视频播放<ul>
+<li>src：你懂得 <a href="%E8%B5%84%E6%BA%90%E5%9C%B0%E5%9D%80">^ ^V^</a></li>
+<li>loop：是否自动播放（×）</li>
+<li>controls：是否默认显示播放控件（√）</li>
+<li>enab-danmu：是否展示弹幕（×）</li>
+<li>danmu-list：弹幕列表</li>
+<li>danmu-btn：是否显示弹幕</li>
+<li>autoplay：自动播放（×）</li>
+<li>poster：视频封面的网络地址，controls 为（×）的时候设置无效</li>
+<li>bindplay / bindpause：触发事件</li>
+</ul>
+</li>
+<li><strong>map</strong> 地图相关<ul>
+<li>latitude：维度、longitude：经度（Number）</li>
+<li>scale：缩放级别，范围是 5~18（16）（Number）</li>
+<li>marker：标记点、poline：路线、circles：圆（Array）</li>
+<li>show-location：显示带有当先的当前定位点</li>
+<li>bindmarktap：单击标记点时触发，返回 maker 或 id （EventHandle，以下也是）</li>
+<li>bindregionchange：视野发生改变的时侯</li>
+<li>bindtap：单击地图、bindupdate：地图渲染更新完成</li>
+</ul>
+</li>
+<li><strong>picker</strong> 从底部弹起滚动选择器<ul>
+<li>header-text：选择器标题（仅安卓可用）</li>
+<li>mode：选择器类型<ul>
+<li>selector、multiSelector、time、date、region（省份）</li>
+</ul>
+</li>
+<li>bindcancel：取消选择时触发（eventHandle）</li>
+<li>disable：禁用（false）</li>
+</ul>
+</li>
+<li><strong>picker-view</strong> 嵌入的滚动选择器</li>
+<li><strong>scroll-view</strong> 实现可滚动视图区域<ul>
+<li>scroll-x / scroll-y 允许横向/纵向滚动（×）<ul>
+<li>纵向滚动需要在样式中为scroll-view设置一个固定高度，否则它会被子元素撑大</li>
+</ul>
+</li>
+<li>scroll-top/scroll-left 设置竖向/横向滚动条的位置（number / string）</li>
+<li>bindscroll 滚动时触发的事件</li>
+</ul>
+</li>
+</ul>
+<h2 id="一些API"><a href="#一些API" class="headerlink" title="一些API"></a>一些API</h2><ul>
+<li><p><strong>音频 API</strong></p>
+<ul>
+<li><p>创建一个 <strong>InnerAudioContext</strong> 实例</p>
+</li>
+<li><p><code>var audioCtx = wx.createInnerAudioContext() </code> ，audioCtx 是一个实例，也就是一个对象，里面有许多属性和方法</p>
+<ul>
+<li><p>属性：</p>
+<ul>
+<li>src(嘿嘿嘿)、starttime(开始时间)、autoplay(自动播放)、volume(音量)</li>
+<li>duration(音频长度，当前合法src的长度)、currentTime(当前时间)、paused(当前是暂停或是停止状态)</li>
+</ul>
+</li>
+<li><p>方法：</p>
+<ul>
+<li><p>play()、pause()、stop()、seek()、destroy()：销毁当前实例</p>
+</li>
+<li><blockquote>
+<p>以下触发的时候，参数都是 callback</p>
+</blockquote>
+</li>
+<li><p>onCanplay(音频进入可播放状态时的事件)</p>
+</li>
+<li><p>onPlay()、onPause()、onStop、onSeek()、onError()、onEnd()：自然播放到结束、onTimeUpdate()：播放进度更新</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>背景音乐API</strong></p>
+<ul>
+<li>创建一个 <strong>BackgroundAudioManager</strong> 实例对象</li>
+<li><code>var bgm = getBackgroundAudioManager()</code></li>
+<li>在 <strong>app.json</strong> 中添加配置：<code>&quot;requireBackgroundModes&quot;: [&quot;audio&quot;]</code></li>
+</ul>
+</li>
+<li><p><strong>打电话</strong></p>
+</li>
+<li><p><code>wx.makePhoneCall( &#123; phoneNumber: &#39;1311111111&#39; &#125; )</code></p>
+</li>
+<li><p><strong>获取位置</strong></p>
+<ul>
+<li><code>wx.getLocation()</code> 方法获取用户当前的位置</li>
+<li><code>wx.openLocation()</code> 方法显示该位置的地图</li>
+</ul>
+</li>
+<li><p><strong>视频API (VideoContext)</strong></p>
+<ul>
+<li>wx.createVideoContext() 的一些常用方法<ul>
+<li>play()/pause()/stop()，播放/暂停/停止</li>
+<li>seek(number)：跳转到指定位置</li>
+<li>playbackRate(number)：播放倍速</li>
+<li>requestFullScreen() / exitFullScreen()：全屏/退出全屏</li>
+<li>sendDanmu：发送弹幕</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="一些事件监听"><a href="#一些事件监听" class="headerlink" title="一些事件监听"></a>一些事件监听</h2><ul>
+<li><p><strong>bindtap</strong></p>
+<ul>
+<li><p>表示绑定 <strong>tap</strong> 事件，点击触发</p>
+</li>
+<li><p>通过实践对象 <code>e</code> 可以获取</p>
+<ul>
+<li><em>type</em> ：事件类型</li>
+<li><em>timestamp</em> ：事件生成时的时间戳</li>
+<li><em>target</em> ：触发事件的组件的一些属性值集合</li>
+<li><em>currentTarget</em> ：当前组件的一些属性值集合</li>
+<li><em>detail</em> ：额外的信息</li>
+</ul>
+</li>
+<li><p><em>catch</em> 事件是可以阻止事件冒泡的，<strong>bind</strong> 事件不行</p>
+</li>
+</ul>
+</li>
+<li><p><strong>this.setDate( { } )</strong> ,该方法的参数是一个对象</p>
+</li>
+<li><p><strong>bindchange</strong> 当value值改变的时候触发</p>
+</li>
+</ul>
+<h2 id="一些配置"><a href="#一些配置" class="headerlink" title="一些配置"></a>一些配置</h2><ul>
+<li><p><strong>“plugins”</strong> 中添加第三方插件 </p>
+</li>
+<li><p><strong>“window”</strong> 中配置页面的整体标题栏样式</p>
+</li>
+<li><p><strong>“tabBar”</strong> 配置底部的菜单</p>
+<ul>
+<li>最多可以配置5个选项</li>
+</ul>
+</li>
+<li><p><strong>“requiredBackgroundModes”: [“audio”]</strong> 请求背景音乐</p>
+</li>
+<li><p><strong>“usingComponents”</strong> 用在页面的配置文件中，表示使用组件</p>
+</li>
+</ul>
+<h2 id="一些单位"><a href="#一些单位" class="headerlink" title="一些单位"></a>一些单位</h2><ul>
+<li><p><strong>vw</strong> 和 <strong>vh</strong>，分别表示页面的百分之百宽和百分之百高</p>
+</li>
+<li><p><strong>rpx</strong>，常用的单位，750rpx 正好是页面宽度的大小</p>
+</li>
+</ul>
+<h2 id="一些插件"><a href="#一些插件" class="headerlink" title="一些插件"></a>一些插件</h2><ul>
+<li><p><strong>腾讯视频插件</strong></p>
+<ul>
+<li><p>小程序管理后台，设置 - 第三方服务 - 添加插件</p>
+</li>
+<li><p>在全局 app.json 中：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;plugins&quot;: &#123;</span><br><span class="line">    &quot;tencentvideo&quot;: &#123;</span><br><span class="line">        &quot;version&quot;: &quot;当前版本&quot;,</span><br><span class="line">        &quot;provider&quot;: &quot;插件里面的AppID&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在使用插件的具体文件中，如：video.json</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;usingComponents&quot;: &#123;</span><br><span class="line">    &quot;txv-video&quot;: &quot;plugin://tencentvideo/video&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>txv-video 名字随便起，将用到 wxml 页面,和 js 中</li>
+</ul>
+</li>
+<li><p>在 xxx.wxml 中：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">txv-video</span> <span class="attr">vid</span>=<span class="string">&quot;xxxmmm&quot;</span> <span class="attr">playerid</span>=<span class="string">&quot;txv1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">txv-video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>vid</em> ：在腾讯视频指定视频的 <em>url</em> 后面，如果不行，点分享，在分享链接中也可以找到</li>
+<li>playerid：指定当前标签，是一个特殊标记，可以随便起一个有特色的的</li>
+</ul>
+</li>
+<li><p>在相对应的 xxx.js 中：首先要使用 <strong>requirePlugin()</strong> 引入插件，然后调用 <strong>getTxvContext()</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">onReady: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> TxvContext = requirePlugin(<span class="string">&#x27;tencentVideo&#x27;</span>)</span><br><span class="line">    <span class="keyword">var</span> txvContext = TxvContext.getTxvContext(<span class="string">&#x27;txv1&#x27;</span>)</span><br><span class="line">    txv.Context.play()</span><br><span class="line">    txv.Context.pause()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h2><ul>
+<li>通过<strong>dataset</strong>区分元素（input）<ul>
+<li>可以使用 <em>data-id</em> 取代掉 <em>id</em>，例如：data-id=“num”，在绑定的事件中通过 <code>e.target.dataset.id</code>就可以获得</li>
+<li>而且，通过<code>e.target.dataset.名称</code>就可以获得 <code>data-名称</code> 的值</li>
+</ul>
+</li>
+</ul>
+<h2 id="一些注意"><a href="#一些注意" class="headerlink" title="一些注意"></a>一些注意</h2><ul>
+<li><p><strong>first-child</strong> 和 <strong>last-child</strong> 相对的是使用元素的本身</p>
+<p><code>&lt;div&gt; &lt;view&gt;我是①&lt;/view&gt; &lt;view&gt;我是②&lt;/view&gt; &lt;/div&gt;</code></p>
+<ul>
+<li>如果要选中div里面的 view ，写的应该是 <code>div view:first-child</code></li>
+</ul>
+</li>
+<li><p>使用 <strong>import</strong> 调用外部样式：import  “ 路径 “</p>
+</li>
+</ul>
+<h2 id="WXS"><a href="#WXS" class="headerlink" title="WXS"></a>WXS</h2><ul>
+<li><p>大名 <em>WeiXin Script</em>，和 js 差不多，是小程序的脚本语言，可以在 wxml 中插入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">wxs</span> <span class="attr">module</span>=<span class="string">&quot;haha&quot;</span>&gt;</span></span><br><span class="line">    module.exports = function(value)&#123;</span><br><span class="line">        var x =xxx</span><br><span class="line">        var m = mmm</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">wxs</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>属性 <em>module</em> 表示模块名称，导出后，可以在标签中使用 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span> &#123;&#123; haha(xm) &#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share">分享到</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_wechat" title="微信"></a>
+    <a class="a2a_button_sina_weibo" title="微博"></a>
+    <a class="a2a_button_email" title="邮件"></a>
+    <a class="a2a_button_qzone" title="QQ空间"></a>
+    <!--    <a class="a2a_button_pinterest"></a>-->
+<!--    <a class="a2a_button_tumblr"></a>-->
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+
+</div>
+
+            
+    
+        <a href="http://yoursite.com/2020/05/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2020/05/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/05/29/express-mysql-%E6%90%AD%E5%BB%BAapi/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    express&amp;mysql 搭建api
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2020/04/18/webpack-D1/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">webpack D1</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/js/" style="font-size: 13.33px;">js</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/php/" style="font-size: 16.67px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/vscode-%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">vscode,插件</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/10/test/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://ejs.bootcss.com/assets/images/jake_display.png)" alt="test" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/08/10/test/" class="title">test</a></p>
+                            <p class="item-date"><time datetime="2020-08-10T01:15:21.000Z" itemprop="datePublished">2020-08-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://ejs.bootcss.com/assets/images/jake_display.png)" alt="Vue Router知识小补充" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a></p>
+                            <p class="item-title"><a href="/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="title">Vue Router知识小补充</a></p>
+                            <p class="item-date"><time datetime="2020-08-05T01:17:50.000Z" itemprop="datePublished">2020-08-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a></p>
+                            <p class="item-title"><a href="/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="title">php数组的常用函数</a></p>
+                            <p class="item-date"><time datetime="2020-07-28T01:58:18.000Z" itemprop="datePublished">2020-07-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
+                            <p class="item-title"><a href="/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="title">php开发环境搭建</a></p>
+                            <p class="item-date"><time datetime="2020-07-24T07:28:40.000Z" itemprop="datePublished">2020-07-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
+                            <p class="item-title"><a href="/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="title">vscode配置phpcs</a></p>
+                            <p class="item-date"><time datetime="2020-07-23T09:06:35.000Z" itemprop="datePublished">2020-07-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/" rel="tag">node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode-%E6%8F%92%E4%BB%B6/" rel="tag">vscode,插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/" rel="tag">vuex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2020 smalljerry<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/ppoffice">Hexo</a>
+            .<br/><a target="_blank" rel="noopener" href="http://github.com/ghaseminya"></a>
+
+            <a href="">lala</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2020/05/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/';
+        
+        this.page.identifier = '微信小程序';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dsjerry' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
