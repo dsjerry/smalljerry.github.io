@@ -8,7 +8,7 @@
     <meta name="description" content="前提小知识点： 前提：在这里做些小笔记，一边看笔记一边看官方文档，方便理解 通过注入路由器，我们可以在任何组件内通过 this.$router 访问路由器，也可以通过 this.$route 访问当前路由 嵌套路由要嵌套的内容也是写进模板组件里面的，而不是写进本身的HTML里面。然后需要在 VueRouter 的参数中使用 children 路由组件传参，就是使用 props 来代替 $route">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue Router知识小补充">
-<meta property="og:url" content="http://yoursite.com/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/index.html">
+<meta property="og:url" content="http://dsjerry.gitee.io/mousejerry/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前提小知识点： 前提：在这里做些小笔记，一边看笔记一边看官方文档，方便理解 通过注入路由器，我们可以在任何组件内通过 this.$router 访问路由器，也可以通过 this.$route 访问当前路由 嵌套路由要嵌套的内容也是写进模板组件里面的，而不是写进本身的HTML里面。然后需要在 VueRouter 的参数中使用 children 路由组件传参，就是使用 props 来代替 $route">
 <meta property="og:locale" content="zh_CN">
@@ -26,35 +26,35 @@
     
 
     
-        <link rel="icon" href="/css/images/ghaseminya.png" />
+        <link rel="icon" href="/mousejerry/css/images/ghaseminya.png" />
     
 
     
-<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/mousejerry/libs/font-awesome/css/font-awesome.min.css">
 
     
-<link rel="stylesheet" href="/libs/open-sans/styles.css">
+<link rel="stylesheet" href="/mousejerry/libs/open-sans/styles.css">
 
     
-<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
-
-
-    
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/mousejerry/libs/source-code-pro/styles.css">
 
 
     
-<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="/mousejerry/css/style.css">
+
 
     
-    
-        
-<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+<script src="/mousejerry/libs/jquery/2.1.3/jquery.min.js"></script>
 
     
     
         
-<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+<link rel="stylesheet" href="/mousejerry/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/mousejerry/libs/justified-gallery/justifiedGallery.min.css">
 
     
     
@@ -69,21 +69,21 @@
         <header id="header">
     <div id="header-main" class="header-inner">
         <div class="outer">
-            <a href="/" id="logo">
+            <a href="/mousejerry/" id="logo">
                 <i class="logo"></i>
                 <span class="site-title">Hexo</span>
             </a>
             <nav id="main-nav">
                 
-                    <a class="main-nav-link" href="/.">首页</a>
+                    <a class="main-nav-link" href="/mousejerry/.">首页</a>
                 
-                    <a class="main-nav-link" href="/archives">归档</a>
+                    <a class="main-nav-link" href="/mousejerry/archives">归档</a>
                 
-                    <a class="main-nav-link" href="/categories">分类</a>
+                    <a class="main-nav-link" href="/mousejerry/categories">分类</a>
                 
-                    <a class="main-nav-link" href="/tags">标签</a>
+                    <a class="main-nav-link" href="/mousejerry/tags">标签</a>
                 
-                    <a class="main-nav-link" href="/about">关于</a>
+                    <a class="main-nav-link" href="/mousejerry/about">关于</a>
                 
             </nav>
             
@@ -125,14 +125,14 @@
             TAGS: '标签',
             UNTITLED: '(未命名)',
         },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
+        ROOT_URL: '/mousejerry/',
+        CONTENT_URL: '/mousejerry/content.json',
     };
     window.INSIGHT_CONFIG = INSIGHT_CONFIG;
 })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="/mousejerry/js/insight.js"></script>
 
 
 </div>
@@ -142,15 +142,15 @@
         <table class="menu outer">
             <tr>
                 
-                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                    <td><a class="main-nav-link" href="/mousejerry/.">首页</a></td>
                 
-                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                    <td><a class="main-nav-link" href="/mousejerry/archives">归档</a></td>
                 
-                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                    <td><a class="main-nav-link" href="/mousejerry/categories">分类</a></td>
                 
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                    <td><a class="main-nav-link" href="/mousejerry/tags">标签</a></td>
                 
-                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                    <td><a class="main-nav-link" href="/mousejerry/about">关于</a></td>
                 
                 <td>
                     
@@ -200,7 +200,7 @@
                     </td>
                     
                     <td>
-                        <a href="/" target="_blank" title="rss" class=tooltip>
+                        <a href="/mousejerry/" target="_blank" title="rss" class=tooltip>
                             <i class="fa fa-rss"></i>
                         </a>
                     </td>
@@ -230,7 +230,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/">
+        <a href="/mousejerry/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/">
             <time datetime="2020-08-05T01:17:50.000Z" itemprop="datePublished">2020-08-05</time>
         </a>
     </div>
@@ -239,13 +239,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a>
+        <a class="article-category-link" href="/mousejerry/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/vue/" rel="tag">vue</a>
+        <a class="tag-link-link" href="/mousejerry/tags/vue/" rel="tag">vue</a>
     </div>
 
                     </div>
@@ -408,7 +408,7 @@
 
             
     
-        <a href="http://yoursite.com/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/">评论</a>
+        <a href="http://dsjerry.gitee.io/mousejerry/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://dsjerry.gitee.io/mousejerry/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/">评论</a>
     
 
         </footer>
@@ -417,7 +417,7 @@
         
 <nav id="article-nav">
     
-        <a href="/2020/08/10/test/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/mousejerry/2020/08/10/test/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
@@ -427,7 +427,7 @@
         </a>
     
     
-        <a href="/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/mousejerry/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
             <div class="article-nav-title">php数组的常用函数</div>
         </a>
@@ -458,7 +458,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/PHP/" style="font-size: 13.33px;">PHP</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/js/" style="font-size: 13.33px;">js</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/php/" style="font-size: 16.67px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/vscode-%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">vscode,插件</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
+            <a href="/mousejerry/tags/PHP/" style="font-size: 13.33px;">PHP</a> <a href="/mousejerry/tags/apache/" style="font-size: 10px;">apache</a> <a href="/mousejerry/tags/express/" style="font-size: 10px;">express</a> <a href="/mousejerry/tags/js/" style="font-size: 13.33px;">js</a> <a href="/mousejerry/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/mousejerry/tags/php/" style="font-size: 16.67px;">php</a> <a href="/mousejerry/tags/python/" style="font-size: 10px;">python</a> <a href="/mousejerry/tags/vscode-%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">vscode,插件</a> <a href="/mousejerry/tags/vue/" style="font-size: 20px;">vue</a> <a href="/mousejerry/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/mousejerry/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/mousejerry/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/mousejerry/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/mousejerry/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/mousejerry/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/mousejerry/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/mousejerry/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/mousejerry/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
         </div>
     </div>
 
@@ -467,7 +467,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a><span class="category-list-count">5</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/mousejerry/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/mousejerry/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/mousejerry/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/mousejerry/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a><span class="category-list-count">5</span></li></ul>
         </div>
     </div>
 
@@ -481,7 +481,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2020/08/10/test/" class="thumbnail">
+                            <a href="/mousejerry/2020/08/10/test/" class="thumbnail">
     
     
         <span style="background-image:url(https://ejs.bootcss.com/assets/images/jake_display.png)" alt="test" class="thumbnail-image"></span>
@@ -492,7 +492,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2020/08/10/test/" class="title">test</a></p>
+                            <p class="item-title"><a href="/mousejerry/2020/08/10/test/" class="title">test</a></p>
                             <p class="item-date"><time datetime="2020-08-10T01:15:21.000Z" itemprop="datePublished">2020-08-10</time></p>
                         </div>
                     </li>
@@ -500,7 +500,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="thumbnail">
+                            <a href="/mousejerry/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="thumbnail">
     
     
         <span style="background-image:url(https://ejs.bootcss.com/assets/images/jake_display.png)" alt="Vue Router知识小补充" class="thumbnail-image"></span>
@@ -510,8 +510,8 @@
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a></p>
-                            <p class="item-title"><a href="/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="title">Vue Router知识小补充</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/mousejerry/categories/%E8%87%AA%E5%B7%B1%E5%AD%A6%E4%B9%A0/">自己学习</a></p>
+                            <p class="item-title"><a href="/mousejerry/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/" class="title">Vue Router知识小补充</a></p>
                             <p class="item-date"><time datetime="2020-08-05T01:17:50.000Z" itemprop="datePublished">2020-08-05</time></p>
                         </div>
                     </li>
@@ -519,7 +519,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="thumbnail">
+                            <a href="/mousejerry/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -529,8 +529,8 @@
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a></p>
-                            <p class="item-title"><a href="/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="title">php数组的常用函数</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/mousejerry/categories/%E8%AF%BE%E5%A0%82%E5%AD%A6%E4%B9%A0/">课堂学习</a></p>
+                            <p class="item-title"><a href="/mousejerry/2020/07/28/php%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="title">php数组的常用函数</a></p>
                             <p class="item-date"><time datetime="2020-07-28T01:58:18.000Z" itemprop="datePublished">2020-07-28</time></p>
                         </div>
                     </li>
@@ -538,7 +538,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="thumbnail">
+                            <a href="/mousejerry/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -548,8 +548,8 @@
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
-                            <p class="item-title"><a href="/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="title">php开发环境搭建</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/mousejerry/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
+                            <p class="item-title"><a href="/mousejerry/2020/07/24/php%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="title">php开发环境搭建</a></p>
                             <p class="item-date"><time datetime="2020-07-24T07:28:40.000Z" itemprop="datePublished">2020-07-24</time></p>
                         </div>
                     </li>
@@ -557,7 +557,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="thumbnail">
+                            <a href="/mousejerry/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -567,8 +567,8 @@
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
-                            <p class="item-title"><a href="/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="title">vscode配置phpcs</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/mousejerry/categories/%E6%8A%80%E5%B7%A7%E5%AD%A6%E4%B9%A0/">技巧学习</a></p>
+                            <p class="item-title"><a href="/mousejerry/2020/07/23/vscode%E9%85%8D%E7%BD%AEphpcs/" class="title">vscode配置phpcs</a></p>
                             <p class="item-date"><time datetime="2020-07-23T09:06:35.000Z" itemprop="datePublished">2020-07-23</time></p>
                         </div>
                     </li>
@@ -583,7 +583,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/mousejerry/archives/2020/08/">八月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/mousejerry/archives/2020/07/">七月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/mousejerry/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/mousejerry/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/mousejerry/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/mousejerry/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -592,7 +592,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/" rel="tag">node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode-%E6%8F%92%E4%BB%B6/" rel="tag">vscode,插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/" rel="tag">vuex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/apache/" rel="tag">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/express/" rel="tag">express</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/node-js/" rel="tag">node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/php/" rel="tag">php</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/vscode-%E6%8F%92%E4%BB%B6/" rel="tag">vscode,插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/vue/" rel="tag">vue</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/vuex/" rel="tag">vuex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/mousejerry/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -634,7 +634,7 @@
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'http://yoursite.com/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/';
+            this.page.url = 'http://dsjerry.gitee.io/mousejerry/2020/08/05/Vue-Router%E5%B0%8F%E6%8B%93%E5%B1%95/';
         
         this.page.identifier = 'Vue-Router小拓展';
     };
@@ -650,36 +650,36 @@
 
     
         
-<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+<script src="/mousejerry/libs/lightgallery/js/lightgallery.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/mousejerry/libs/lightgallery/js/lg-thumbnail.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+<script src="/mousejerry/libs/lightgallery/js/lg-pager.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+<script src="/mousejerry/libs/lightgallery/js/lg-autoplay.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+<script src="/mousejerry/libs/lightgallery/js/lg-fullscreen.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+<script src="/mousejerry/libs/lightgallery/js/lg-zoom.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+<script src="/mousejerry/libs/lightgallery/js/lg-hash.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+<script src="/mousejerry/libs/lightgallery/js/lg-share.min.js"></script>
 
         
-<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+<script src="/mousejerry/libs/lightgallery/js/lg-video.min.js"></script>
 
     
     
         
-<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/mousejerry/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
 
     
 
@@ -687,7 +687,7 @@
 
 <!-- Custom Scripts -->
 
-<script src="/js/main.js"></script>
+<script src="/mousejerry/js/main.js"></script>
 
 
     </div>
